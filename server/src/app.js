@@ -140,13 +140,22 @@ export function createApp({
         createdAt: t,
       });
 
+      const reqOrigin = req.headers.origin;
+      const finishUrl =
+        reqOrigin &&
+        allowedOrigins.includes(reqOrigin) &&
+        reqOrigin.startsWith('https://') &&
+        !reqOrigin.includes('localhost')
+          ? `${reqOrigin}/`
+          : appUrl;
+
       let snap;
       try {
         snap = await midtrans.createSnapTransaction({
           transaction_details: { order_id: orderId, gross_amount: def.price },
           item_details: [{ id: plan, price: def.price, quantity: 1, name: def.name.slice(0, 50) }],
           customer_details: req.user.email ? { email: req.user.email } : undefined,
-          callbacks: { finish: appUrl },
+          callbacks: { finish: finishUrl },
         });
       } catch (err) {
         await store.updateOrderStatus(orderId, 'failed').catch(() => {});

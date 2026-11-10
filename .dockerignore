@@ -13,4 +13,9 @@ android
 
 server
 firestore.rules
+*.aab
+*.apk
+*.jks
+docs
+
 

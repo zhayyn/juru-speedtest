@@ -27,7 +27,7 @@ if (!midtrans) {
 const vouchers = loadVouchers(env);
 const allowedOrigins = (
   env.ALLOWED_ORIGINS ||
-  'https://juruspeedtest.online,https://www.juruspeedtest.online,https://localhost,capacitor://localhost,http://localhost'
+  'https://juruspeedtest.desablockchain.com,https://juruspeedtest-web-212855420460.asia-east1.run.app,https://juruspeedtest.online,https://www.juruspeedtest.online,https://localhost,capacitor://localhost,http://localhost'
 )
   .split(',')
   .map(s => s.trim())
@@ -39,7 +39,7 @@ const app = createApp({
   midtrans,
   vouchers,
   allowedOrigins,
-  appUrl: env.APP_URL || 'https://juruspeedtest.online/',
+  appUrl: env.APP_URL || 'https://juruspeedtest.desablockchain.com/',
 });
 
 const port = Number(env.PORT) || 8080;
