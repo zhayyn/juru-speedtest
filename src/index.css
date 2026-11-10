@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+/* Tailwind v4 class-based dark mode */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono-tabular {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Subtle technical grid backdrop */
+.bg-telemetry-grid {
+  background-size: 32px 32px;
+  background-image:
+    linear-gradient(to right, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+}
+
+.dark .bg-telemetry-grid {
+  background-image:
+    linear-gradient(to right, rgba(51, 65, 85, 0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(51, 65, 85, 0.22) 1px, transparent 1px);
+}
+
+/* Custom sleek scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.35);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.55);
+}
+
+/* Elegant Electric / Light Beam Border for Pro Feature Panel */
+@keyframes pro-border-spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.pro-electric-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.75rem;
+  padding: 2px;
+  box-shadow:
+    0 0 28px -6px rgba(245, 158, 11, 0.28),
+    0 0 45px -12px rgba(20, 184, 166, 0.25);
+}
+
+.pro-electric-frame::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 220%;
+  height: 220%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 55deg,
+    rgba(45, 212, 191, 0.85) 85deg,
+    rgba(251, 191, 36, 1) 115deg,
+    rgba(56, 189, 248, 0.9) 140deg,
+    transparent 175deg,
+    transparent 235deg,
+    rgba(251, 191, 36, 0.85) 265deg,
+    rgba(45, 212, 191, 1) 295deg,
+    transparent 335deg,
+    transparent 360deg
+  );
+  animation: pro-border-spin 6.5s linear infinite;
+  z-index: 0;
+}
+
+.pro-electric-inner {
+  position: relative;
+  z-index: 1;
+  border-radius: calc(1.75rem - 2px);
+}
+
+

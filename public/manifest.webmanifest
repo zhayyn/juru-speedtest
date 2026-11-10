@@ -1,0 +1,22 @@
+{
+  "name": "Juru Speedtest — Optimasi APN Seluler Indonesia & Ping Stabil Game",
+  "short_name": "Juru Speedtest",
+  "description": "Uji kecepatan internet akurat (Download, Upload, Ping, Jitter, Bufferbloat), perbandingan Sebelum vs Sesudah, Radar Ping Game, dan database lengkap APN kartu SIM Indonesia.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#070B14",
+  "theme_color": "#0D9488",
+  "lang": "id-ID",
+  "categories": ["utilities", "productivity", "games"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
+

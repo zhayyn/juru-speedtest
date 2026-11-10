@@ -1,0 +1,17 @@
+rules_version = '2';
+
+// Klien (browser) hanya boleh MEMBACA dokumen paket miliknya sendiri.
+// Semua penulisan (voucher, pembayaran Rp 4.999, webhook Midtrans) dilakukan server
+// lewat Firebase Admin SDK, yang tidak terkena aturan ini.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+

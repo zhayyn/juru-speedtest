@@ -1,0 +1,10 @@
+services:
+  juru-speedtest:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: juruspeedtest-web
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+

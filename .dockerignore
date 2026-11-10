@@ -1,0 +1,16 @@
+node_modules
+dist
+dist-ssr
+build
+coverage
+.git
+.gitignore
+.DS_Store
+*.log
+.env*
+!.env.example
+android
+
+server
+firestore.rules
+

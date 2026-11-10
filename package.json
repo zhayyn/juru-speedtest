@@ -1,0 +1,40 @@
+{
+  "name": "juru-speedtest",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Juru Speedtest - Uji Kecepatan Internet, Latensi, Bufferbloat & Diagnostik Jaringan Akurat",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port=3005 --host=0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --port=4175",
+    "android:init": "npx cap add android",
+    "android:sync": "npm run build && npx cap copy android",
+    "android:open": "npx cap open android",
+    "android:apk": "npm run build && npx cap copy android && cd android && ./gradlew assembleDebug && cp app/build/outputs/apk/debug/app-debug.apk ../Juru-Speedtest-v1.0.0-debug.apk",
+    "android:aab": "npm run build && npx cap copy android && cd android && ./gradlew bundleRelease && cp app/build/outputs/bundle/release/app-release.aab ../Juru-Speedtest-v1.0.0-release.aab",
+    "clean": "rm -rf dist",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.6.0",
+    "@capacitor/core": "^8.6.0",
+    "@tailwindcss/vite": "^4.3.5",
+    "@vitejs/plugin-react": "^6.2.1",
+    "firebase": "^12.19.0",
+    "lucide-react": "^1.70.0",
+    "motion": "^12.23.24",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "vite": "^8.3.6"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.6.0",
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "autoprefixer": "^10.4.21",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^7.0.2"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "juru-speedtest-api",
+  "private": true,
+  "version": "1.0.0",
+  "description": "API pembayaran Rp 4.999 Selamanya, voucher & aktivasi paket Juru Speedtest (Cloud Run + Firestore + Midtrans)",
+  "type": "module",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test test/"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "firebase-admin": "^13.0.0"
+  }
+}
+
