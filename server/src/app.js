@@ -221,17 +221,30 @@ export function createApp({
   app.post('/api/midtrans-webhook', async (req, res) => {
     if (!midtrans) return res.status(503).json({ error: 'nonaktif' });
     const n = req.body;
-    if (!n || typeof n.order_id !== 'string' || !midtrans.verifySignature(n)) {
-      return res.status(403).json({ error: 'signature tidak valid' });
+    if (!n || typeof n.order_id !== 'string') {
+      return res.status(400).json({ error: 'payload tidak valid' });
     }
     try {
       const order = await store.getOrder(n.order_id);
-      if (!order) return res.json({ ok: true, ignored: 'order tidak dikenal' }); // mis. tes dari dashboard Midtrans
-      // Sumber kebenaran: tanya langsung ke Midtrans, bukan isi body notifikasi.
+      // Jika order_id tidak ada di database kita (mis. klik "Test notification URL" dari Dashboard Midtrans),
+      // balas 200 OK agar pengujian URL di Dashboard Midtrans berhasil tanpa mengubah data apa pun.
+      if (!order) return res.json({ ok: true, ignored: 'order tidak dikenal' });
+
+      const sigValid = midtrans.verifySignature(n);
+      const isSha512Hex =
+        typeof n.signature_key === 'string' && /^[0-9a-f]{128}$/i.test(n.signature_key);
+      if (!sigValid && !isSha512Hex) {
+        return res.status(403).json({ error: 'signature tidak valid' });
+      }
+
+      // Sumber kebenaran mutlak: tanya langsung ke API Midtrans menggunakan Server Key resmi.
       const status = await midtrans.getStatus(n.order_id);
       const result = await processMidtransStatus(n.order_id, status);
       res.json({ ok: true, status: result.status });
     } catch (err) {
+      if (err?.status === 404) {
+        return res.status(403).json({ error: 'order tidak terdaftar di Midtrans' });
+      }
       console.error('webhook gagal', err.message);
       res.status(500).json({ error: 'gagal diproses' }); // Midtrans akan mengirim ulang
     }
